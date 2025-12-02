@@ -11,9 +11,16 @@ connectDB();
 app.use(morgan('dev')); 
 app.use(express.json()); 
 
-// TODO: Cargar Rutas (lo haremos en Clase 2)
+// Routes
 const productRoutes = require('./src/presentation/routes/product.routes');
+const userRoutes = require('./src/presentation/routes/user.routes');
+const roleRoutes = require('./src/presentation/routes/role.routes');
+const authRoutes = require('./src/presentation/routes/auth.routes'); // Importar rutas de autenticación
+
 app.use('/api/v1/products', productRoutes);
+app.use('/api/v1/users', userRoutes);
+app.use('/api/v1/roles', roleRoutes);
+app.use('/api/v1/auth', authRoutes); // Usar rutas de autenticación
 
 
 // Healthcheck Endpoint (para probar)
