@@ -16,7 +16,8 @@ const cuponController = new CuponController(cuponService);
 const router = Router();
 router.get('/', asyncHandler(cuponController.getAll));
 router.get('/:id', asyncHandler(cuponController.getById));
-router.post('/', [authenticateToken, isAdmin], asyncHandler(cuponController.create));
+//router.post('/', [authenticateToken, isAdmin], asyncHandler(cuponController.create));
+router.post('/',  asyncHandler(cuponController.create));
 router.put('/:id', [authenticateToken, isAdmin], asyncHandler(cuponController.update));
 router.delete('/:id', [authenticateToken, isAdmin], asyncHandler(cuponController.delete));
 
