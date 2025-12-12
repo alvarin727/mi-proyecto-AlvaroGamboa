@@ -12,8 +12,9 @@ const roleController = new RoleController(roleService);
 const router = Router();
 router.get('/', asyncHandler(roleController.getAll));
 router.get('/:id', asyncHandler(roleController.getById));
+
 router.post('/', [isAdmin], asyncHandler(roleController.create));
+
 router.put('/:id', asyncHandler(roleController.update));
 router.delete('/:id', asyncHandler(roleController.delete));
-
 module.exports = router;
