@@ -28,14 +28,34 @@ class OrderMongoRepository extends OrderRepository {
     return o ? mapDoc(o) : null;
   }
 
+
+
+
+
   async create(orderEntity) {
+
+    let cupon_discount = 0;
+  let cupon = null;
+
+  // 1. Si viene cupón
+  if (orderEntity.cuponId) {
+    cupon = await Cupon.findById(orderEntity.cuponId);
+
+    if (!cupon) {
+      throw new Error('Cupón no válido');
+    }
+
+    // 2. Obtener el valor del cupón
+    cupon_discount = cupon.value;
+  }
+
     const doc = new OrderModel({
       userId: orderEntity.userId,
       cuponId: orderEntity.cuponId || undefined,
       items: orderEntity.items,
       subtotal: orderEntity.subtotal,
-      discount: orderEntity.discount,
-      total: orderEntity.total,
+      discount: cupon_discount,
+      total: orderEntity.subtotal-orderEntity.total,
       status: orderEntity.status
     });
     const saved = await doc.save();
