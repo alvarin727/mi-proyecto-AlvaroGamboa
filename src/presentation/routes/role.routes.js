@@ -84,7 +84,7 @@ router.get('/:id', asyncHandler(roleController.getById));
  */
 
 
-router.post('/', [isAdmin], asyncHandler(roleController.create));
+router.post('/', [authenticateToken, isAdmin], asyncHandler(roleController.create));
 
 
 
@@ -117,7 +117,7 @@ router.post('/', [isAdmin], asyncHandler(roleController.create));
  */
 
 
-router.put('/:id', asyncHandler(roleController.update));
+router.put('/:id',[authenticateToken, isAdmin], asyncHandler(roleController.update));
 
 
 /**
